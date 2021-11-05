@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { HomepageComponent } from './homepage/homepage.component';
 import { DiaryComponent } from './diary/diary.component';
+import { HabitsComponent } from './habits/habits.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
-  { path: 'diary', component: DiaryComponent }
+  { path: 'diary', component: DiaryComponent },
+  { path: 'habits', component: HabitsComponent },
 ];
 
 @NgModule({

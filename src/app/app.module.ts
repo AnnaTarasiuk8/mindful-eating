@@ -7,13 +7,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { DiaryComponent } from './diary/diary.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HabitsComponent } from './habits/habits.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
     NavbarComponent,
-    DiaryComponent
+    DiaryComponent,
+    HabitsComponent
   ],
   imports: [
     BrowserModule,
