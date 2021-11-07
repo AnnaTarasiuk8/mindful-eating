@@ -1,0 +1,16 @@
+.google-login-btn {
+    background-image: url('https://lh3.googleusercontent.com/d_S5gxu_S1P6NR1gXeMthZeBzkrQMHdI5uvXrpn3nfJuXpCjlqhLQKH_hbOxTHxFhp5WugVOEcl4WDrv9rmKBDOMExhKU5KmmLFQVg');
+    background-repeat: no-repeat;
+    background-size: 20%;
+    background-position: 10%;
+    padding-left: 10%;
+  }
+  
+  mat-card {
+    margin: 10% auto;
+    width: 50%;
+  }
+  
+  mat-form-field {
+    width: 100%;
+  }
