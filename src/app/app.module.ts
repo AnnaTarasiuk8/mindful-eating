@@ -17,6 +17,7 @@ import {MatInputModule} from '@angular/material/input';
 
 import {GoogleLoginProvider, SocialLoginModule} from 'angularx-social-login';
 import {AuthGuardService} from './auth-guard.service';
+import { ProgressComponent } from './progress/progress.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import {AuthGuardService} from './auth-guard.service';
     NavbarComponent,
     DiaryComponent,
     HabitsComponent,
-    LoginComponent
+    LoginComponent,
+    ProgressComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +37,7 @@ import {AuthGuardService} from './auth-guard.service';
       { path: 'home', component: HomepageComponent, canActivate: [AuthGuardService] },
       { path: 'diary', component: DiaryComponent, canActivate: [AuthGuardService] },
       { path: 'habits', component: HabitsComponent, canActivate: [AuthGuardService] },
+      { path: 'progress', component: ProgressComponent, canActivate: [AuthGuardService] },
       {path: 'login', component: LoginComponent},
       {path: '**', component: LoginComponent}
     ]),
