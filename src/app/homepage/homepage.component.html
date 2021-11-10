@@ -1,4 +1,11 @@
-<h2>Homepage</h2>
+ <!DOCTYPE html>
+<head>
+
+</head>
+<body>
+
+  <h2>Homepage</h2>
+
 <div *ngIf="socialAuthService.authState | async as socialUser">
     <p>Hello, {{socialUser.name}}!</p>
     <br>
@@ -6,3 +13,6 @@
     <br>
     <button mat-raised-button (click)="logout()">Logout</button>
   </div>
+</body> 
+
+
