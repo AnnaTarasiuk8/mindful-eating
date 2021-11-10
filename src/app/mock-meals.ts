@@ -8,6 +8,7 @@ export const MEALS: Meal[] = [
     quantity: '1/2 cup',
     notes: 'No brown sugar',
     time: '2021-11-09T08:00:54',
+    foodGroup: 'grain',
   },
   {
     id: 234,
@@ -16,6 +17,7 @@ export const MEALS: Meal[] = [
     quantity: '2 rolls',
     notes: 'Soy sauce + wasabi',
     time: '2021-11-09T11:40:54',
+    foodGroup: 'protein',
   },
   {
     id: 345,
@@ -23,6 +25,7 @@ export const MEALS: Meal[] = [
     name: 'Lentils',
     quantity: '1/3 cup',
     time: '2021-11-09T18:30:54',
+    foodGroup: 'grain',
   },
   {
     id: 456,
@@ -30,6 +33,7 @@ export const MEALS: Meal[] = [
     name: 'Strawberries',
     quantity: '5 berries',
     time: '2021-11-09T23:40:54',
+    foodGroup: 'fruit',
   },
   {
     id: 567,
@@ -38,6 +42,7 @@ export const MEALS: Meal[] = [
     quantity: '2 small pancakes',
     notes: '1 oz of syrup, no butter',
     time: '2021-11-10T08:00:54',
+    foodGroup: 'protein',
   },
   {
     id: 678,
@@ -45,6 +50,7 @@ export const MEALS: Meal[] = [
     name: 'Lasagna',
     quantity: '1 small piece',
     time: '2021-11-10T11:40:54',
+    foodGroup: 'protein',
   },
   {
     id: 789,
@@ -52,5 +58,6 @@ export const MEALS: Meal[] = [
     name: 'Carrots and hummus',
     quantity: '4 large carrots',
     time: '2021-11-10T18:30:54',
+    foodGroup: 'vegetable',
   },
 ];
