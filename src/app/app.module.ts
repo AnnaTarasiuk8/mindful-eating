@@ -14,10 +14,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { GoogleLoginProvider, SocialLoginModule } from 'angularx-social-login';
 import { AuthGuardService } from './auth-guard.service';
 import { ProgressComponent } from './progress/progress.component';
+import { AddHeaderInterceptor } from './auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -68,6 +70,7 @@ import { ProgressComponent } from './progress/progress.component';
     SocialLoginModule,
     // AppRoutingModule,
     FontAwesomeModule,
+    HttpClientModule,
   ],
   providers: [
     {
@@ -83,6 +86,11 @@ import { ProgressComponent } from './progress/progress.component';
           },
         ],
       },
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AddHeaderInterceptor,
+      multi: true,
     },
     AuthGuardService,
   ],
