@@ -9,16 +9,15 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HabitsComponent } from './habits/habits.component';
 import { LoginComponent } from './login/login.component';
 import { RouterModule, Routes } from '@angular/router';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatCardModule} from '@angular/material/card';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatButtonModule} from '@angular/material/button';
-import {MatInputModule} from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
-import {GoogleLoginProvider, SocialLoginModule} from 'angularx-social-login';
-import {AuthGuardService} from './auth-guard.service';
+import { GoogleLoginProvider, SocialLoginModule } from 'angularx-social-login';
+import { AuthGuardService } from './auth-guard.service';
 import { ProgressComponent } from './progress/progress.component';
-
 
 @NgModule({
   declarations: [
@@ -28,18 +27,38 @@ import { ProgressComponent } from './progress/progress.component';
     DiaryComponent,
     HabitsComponent,
     LoginComponent,
-    ProgressComponent
+    ProgressComponent,
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot([
-      { path: '', component: HomepageComponent, canActivate: [AuthGuardService] },
-      { path: 'home', component: HomepageComponent, canActivate: [AuthGuardService] },
-      { path: 'diary', component: DiaryComponent, canActivate: [AuthGuardService] },
-      { path: 'habits', component: HabitsComponent, canActivate: [AuthGuardService] },
-      { path: 'progress', component: ProgressComponent, canActivate: [AuthGuardService] },
-      {path: 'login', component: LoginComponent},
-      {path: '**', component: LoginComponent}
+      {
+        path: '',
+        component: HomepageComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'home',
+        component: HomepageComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'diary',
+        component: DiaryComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'habits',
+        component: HabitsComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'progress',
+        component: ProgressComponent,
+        canActivate: [AuthGuardService],
+      },
+      { path: 'login', component: LoginComponent },
+      { path: '**', component: LoginComponent },
     ]),
     BrowserAnimationsModule,
     MatCardModule,
@@ -48,7 +67,7 @@ import { ProgressComponent } from './progress/progress.component';
     MatInputModule,
     SocialLoginModule,
     // AppRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
   ],
   providers: [
     {
@@ -58,13 +77,15 @@ import { ProgressComponent } from './progress/progress.component';
         providers: [
           {
             id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider('792310928749-p2tvru9ldu02frukfhnhv4173b4t4el4.apps.googleusercontent.com') // your client id
-          }
-        ]
-      }
+            provider: new GoogleLoginProvider(
+              '792310928749-p2tvru9ldu02frukfhnhv4173b4t4el4.apps.googleusercontent.com'
+            ), // your client id
+          },
+        ],
+      },
     },
-    AuthGuardService
+    AuthGuardService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
