@@ -1,18 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 import { Meal } from './meal';
-import { MEALS } from './mock-meals';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MealService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   getMeals(): Observable<Meal[]> {
-    const meals = of(MEALS);
-
-    return meals;
+    return this.http.get<Meal[]>('http://localhost:3000/meals');
   }
 }
