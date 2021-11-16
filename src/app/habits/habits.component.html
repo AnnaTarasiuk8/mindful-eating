@@ -1,1 +1,39 @@
 <h2>Habit Page</h2>
+
+<div class="d-flex justify-content-end">
+  <a routerLink="/habits/create" class="btn btn-outline-success"
+    ><fa-icon [icon]="faPlus"></fa-icon> Add meal</a
+  >
+</div>
+
+<table
+  *ngIf="meals.length; else elseBlock"
+  class="table table-hover table-striped"
+>
+  <thead>
+    <tr>
+      <th scope="col">Type</th>
+      <th scope="col">Name</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Food Group</th>
+      <th scope="col">Notes</th>
+      <th scope="col">Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let meal of meals">
+      <td>{{ meal.type }}</td>
+      <td>{{ meal.name }}</td>
+      <td>{{ meal.quantity }}</td>
+      <td>{{ meal.foodGroup }}</td>
+      <td>{{ meal.notes }}</td>
+      <td>{{ meal.time | date: "medium" }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #elseBlock>
+  <div class="alert alert-info" role="alert">
+    No meals located. Get started by adding one!
+  </div>
+</ng-template>

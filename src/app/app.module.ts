@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -20,6 +21,7 @@ import { GoogleLoginProvider, SocialLoginModule } from 'angularx-social-login';
 import { AuthGuardService } from './auth-guard.service';
 import { ProgressComponent } from './progress/progress.component';
 import { AddHeaderInterceptor } from './auth-interceptor';
+import { CreateComponent as CreateMealComponent } from './habits/create/create.component';
 
 @NgModule({
   declarations: [
@@ -30,9 +32,12 @@ import { AddHeaderInterceptor } from './auth-interceptor';
     HabitsComponent,
     LoginComponent,
     ProgressComponent,
+    CreateMealComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       {
         path: '',
@@ -52,6 +57,11 @@ import { AddHeaderInterceptor } from './auth-interceptor';
       {
         path: 'habits',
         component: HabitsComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'habits/create',
+        component: CreateMealComponent,
         canActivate: [AuthGuardService],
       },
       {

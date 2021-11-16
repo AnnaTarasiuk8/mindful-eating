@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+
+import { Meal } from '../meal';
+import { MealService } from '../meal.service';
 
 @Component({
   selector: 'app-habits',
@@ -6,7 +10,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./habits.component.css'],
 })
 export class HabitsComponent implements OnInit {
-  constructor() {}
+  meals: Meal[] = [];
+  faPlus = faPlus;
 
-  ngOnInit(): void {}
+  constructor(private mealService: MealService) {}
+
+  ngOnInit(): void {
+    this.getMeals();
+  }
+
+  getMeals(): void {
+    this.mealService.getAll().subscribe((meals) => (this.meals = meals));
+  }
 }
