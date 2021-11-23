@@ -1,1 +1,66 @@
 <h2>My Diary</h2>
+
+<div class="container">
+  <!-- <h3 *ngIf="currentDiaryEntry != null">{{currentDiaryEntry.date}}</h3>
+  <h3 *ngIf="currentDiaryEntry != null">{{currentDiaryEntry.notes}}</h3> -->
+  <h3>{{currentDateString}}</h3>
+  <!-- <h3>{{currentDiaryEntry.date}}</h3> -->
+  <h3>{{currentDiaryEntry.notes}}</h3>
+  <form [formGroup]="diaryForm" (ngSubmit)="submitForm()" novalidate>
+    <!-- <div class="mb-3">
+      <label for="type" class="form-label">Type of Meal</label>
+      <select class="form-select" id="type" formControlName="type">
+        <option selected>Select a type</option>
+        <option value="breakfast">Breakfast</option>
+        <option value="lunch">Lunch</option>
+        <option value="dinner">Dinner</option>
+        <option value="snack">Snack</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="foodGroup" class="form-label">Main Food Group</label>
+      <select class="form-select" id="foodGroup" formControlName="foodGroup">
+        <option selected>Select the main food group</option>
+        <option value="grain">Grain</option>
+        <option value="protein">Protein</option>
+        <option value="fruit">Fruit</option>
+        <option value="vegetable">Vegetable</option>
+        <option value="dairy">Dairy</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="name" class="form-label">Meal Description</label>
+      <input
+        type="input"
+        class="form-control"
+        id="name"
+        formControlName="name"
+      />
+    </div> -->
+    <!-- <div class="mb-3">
+      <label for="date" class="form-label">Date</label>
+      <input
+        type="input"
+        class="form-control"
+        id="date"
+        formControlName="date"
+      />
+    </div> -->
+    <div class="mb-3">
+      <label for="notes" class="form-label">Notes</label>
+      <textarea
+        class="form-control"
+        id="notes"
+        formControlName="notes"
+      ></textarea>
+    </div>
+    <div class="d-flex justify-content-between">
+      <div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+      <div *ngIf="error" class="alert alert-danger" role="alert">
+        {{ error }}
+      </div>
+    </div>
+  </form>
+</div>
