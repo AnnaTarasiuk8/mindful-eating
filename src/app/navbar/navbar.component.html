@@ -59,3 +59,9 @@
     </div>
   </div>
 </nav>
+<div
+  *ngIf="affirmation && affirmation.length > 0"
+  class="alert alert-success text-center fixed-bottom"
+>
+  <span>{{ affirmation[0].phrase }}</span>
+</div>
