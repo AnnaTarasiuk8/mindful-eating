@@ -17,8 +17,8 @@ export class DiaryComponent implements OnInit {
   currentDate: Date = new Date();
   currentDateString = this.currentDate.toLocaleDateString();
   currentDiaryEntry: DiaryEntry = {
-    date: "",
-    notes: ""
+    date: '',
+    notes: '',
   };
 
   diaryForm: FormGroup = this.formBuilder.group({
@@ -29,49 +29,54 @@ export class DiaryComponent implements OnInit {
     public formBuilder: FormBuilder,
     public diaryService: DiaryService,
     private router: Router
-    ) {}
+  ) {}
 
   ngOnInit(): void {
+    // this.currentDiaryEntry = {
+    //   date: "",
+    //   notes: ""
+    // };
+    // this.getDiaryEntries();
+    // // console.log(this.diaryEntries);
 
-    this.currentDiaryEntry = {
-      date: "",
-      notes: ""
-    };
+    // this.currentDiaryEntry.date = this.currentDate.toLocaleDateString();
+    // // this.diaryForm.setValue(
+    // //   {
+    // //     date: this.currentDiaryEntry.date,
+    // //     notes: "testing123"
+    // //   }
+    // //   );
+
     this.getDiaryEntries();
-    // console.log(this.diaryEntries);
-
-
-    this.currentDiaryEntry.date = this.currentDate.toLocaleDateString();
-    // this.diaryForm.setValue(
-    //   {
-    //     date: this.currentDiaryEntry.date,
-    //     notes: "testing123"
-    //   }
-    //   );
-
-
   }
 
   getDiaryEntries(): void {
-    this.diaryService.getAll().subscribe((diaryEntries) => {
-      console.log("111", diaryEntries)
-      this.diaryEntries = diaryEntries;
-      this.currentDiaryEntry = diaryEntries[diaryEntries.length-1];
-      console.log("2222", this.currentDiaryEntry)
-      this.diaryForm.setValue({
-        date: this.currentDiaryEntry.date,
-        notes: this.currentDiaryEntry.notes
-      });
+    this.diaryService.getAll().subscribe((diaryEntry) => {
+      console.log({ diaryEntry });
+      if (Array.isArray(diaryEntry) && diaryEntry.length > 0) {
+        this.diaryForm.setValue({
+          date: diaryEntry[0]?.date,
+          notes: diaryEntry[0]?.notes,
+        });
+      }
+      // console.log("111", diaryEntries)
+      // this.diaryEntries = diaryEntries;
+      // this.currentDiaryEntry = diaryEntries[diaryEntries.length-1];
+      // console.log("2222", this.currentDiaryEntry)
+      // this.diaryForm.setValue({
+      //   date: this.currentDiaryEntry.date,
+      //   notes: this.currentDiaryEntry.notes
+      // });
     });
     // console.log(this.diaryEntries);
   }
 
   submitForm() {
-    console.log("Form submitted", this.diaryForm.value);
+    console.log('Form submitted', this.diaryForm.value);
     this.diaryService.create(this.diaryForm.value).subscribe(
       (diary) => {
-        console.log("Diary updated", diary);
-        this.getDiaryEntries()
+        console.log('Diary updated', diary);
+        this.getDiaryEntries();
         // this.router.navigateByUrl('/habits');
       },
       (error) => {
