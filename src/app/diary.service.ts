@@ -14,6 +14,10 @@ export class DiaryService {
 
   constructor(private http: HttpClient) {}
 
+  get(date: String): Observable<DiaryEntry> {
+    return this.http.get<DiaryEntry>(`http://localhost:3000/diary/${date}`);
+  }
+
   getAll(): Observable<DiaryEntry[]> {
     return this.http.get<DiaryEntry[]>('http://localhost:3000/diary');
   }

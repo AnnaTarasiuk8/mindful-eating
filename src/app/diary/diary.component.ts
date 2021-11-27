@@ -1,4 +1,4 @@
-import { DiaryEntry } from './../diaryEntry';
+import { DiaryEntry } from '../diaryEntry';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -11,6 +11,8 @@ import { DiaryService } from '../diary.service';
 })
 export class DiaryComponent implements OnInit {
   error?: String;
+  success: Boolean = false;
+  modalDiaryEntry?: DiaryEntry;
 
   diaryEntries: DiaryEntry[] = [];
 
@@ -20,11 +22,13 @@ export class DiaryComponent implements OnInit {
     date: '',
     notes: '',
   };
+  encodedCurrentDateString = encodeURIComponent(this.currentDateString);
 
   diaryForm: FormGroup = this.formBuilder.group({
-    date: [this.currentDate.toLocaleDateString()],
+    date: [this.encodedCurrentDateString],
     notes: [''],
   });
+
   constructor(
     public formBuilder: FormBuilder,
     public diaryService: DiaryService,
@@ -32,54 +36,42 @@ export class DiaryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.currentDiaryEntry = {
-    //   date: "",
-    //   notes: ""
-    // };
-    // this.getDiaryEntries();
-    // // console.log(this.diaryEntries);
-
-    // this.currentDiaryEntry.date = this.currentDate.toLocaleDateString();
-    // // this.diaryForm.setValue(
-    // //   {
-    // //     date: this.currentDiaryEntry.date,
-    // //     notes: "testing123"
-    // //   }
-    // //   );
-
+    this.getDiary();
     this.getDiaryEntries();
   }
 
-  getDiaryEntries(): void {
-    this.diaryService.getAll().subscribe((diaryEntry) => {
-      console.log({ diaryEntry });
-      if (Array.isArray(diaryEntry) && diaryEntry.length > 0) {
-        this.diaryForm.setValue({
-          date: diaryEntry[0]?.date,
-          notes: diaryEntry[0]?.notes,
-        });
-      }
-      // console.log("111", diaryEntries)
-      // this.diaryEntries = diaryEntries;
-      // this.currentDiaryEntry = diaryEntries[diaryEntries.length-1];
-      // console.log("2222", this.currentDiaryEntry)
-      // this.diaryForm.setValue({
-      //   date: this.currentDiaryEntry.date,
-      //   notes: this.currentDiaryEntry.notes
-      // });
+  getDiary(): void {
+    this.diaryService.get(this.encodedCurrentDateString).subscribe((diary) => {
+      this.diaryForm.setValue({
+        date: diary?.date || this.encodedCurrentDateString,
+        notes: diary?.notes || '',
+      });
     });
-    // console.log(this.diaryEntries);
+  }
+
+  getDiaryEntries(): void {
+    this.diaryService.getAll().subscribe((diaries) => {
+      if (Array.isArray(diaries)) {
+        this.diaryEntries = diaries;
+      }
+    });
+  }
+
+  setModalDiaryEntry(entry?: DiaryEntry): void {
+    this.modalDiaryEntry = entry;
   }
 
   submitForm() {
-    console.log('Form submitted', this.diaryForm.value);
     this.diaryService.create(this.diaryForm.value).subscribe(
-      (diary) => {
-        console.log('Diary updated', diary);
+      () => {
         this.getDiaryEntries();
-        // this.router.navigateByUrl('/habits');
+        this.success = true;
+        setTimeout(() => {
+          this.success = false;
+        }, 3000);
       },
       (error) => {
+        console.error(error);
         this.error = 'Unable to create the diaryEntry. Please try again.';
       }
     );
