@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Meal } from './meal';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -15,12 +16,12 @@ export class MealService {
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<Meal[]> {
-    return this.http.get<Meal[]>('http://localhost:3000/meals');
+    return this.http.get<Meal[]>(`${environment.apiUrl}/meals`);
   }
 
   create(meal: Meal): Observable<Meal> {
     return this.http.post<Meal>(
-      'http://localhost:3000/meals',
+      `${environment.apiUrl}/meals`,
       JSON.stringify(meal),
       this.options
     );
