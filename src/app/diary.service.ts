@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { DiaryEntry } from './diaryEntry';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -15,16 +16,18 @@ export class DiaryService {
   constructor(private http: HttpClient) {}
 
   get(date: String): Observable<DiaryEntry> {
-    return this.http.get<DiaryEntry>(`http://localhost:3000/diary/${date}`);
+    return this.http.get<DiaryEntry>(
+      `${environment.apiUrl}/diary?date=${date}`
+    );
   }
 
   getAll(): Observable<DiaryEntry[]> {
-    return this.http.get<DiaryEntry[]>('http://localhost:3000/diary');
+    return this.http.get<DiaryEntry[]>(`${environment.apiUrl}/diary`);
   }
 
   create(diary: DiaryEntry): Observable<DiaryEntry> {
     return this.http.post<DiaryEntry>(
-      'http://localhost:3000/diary',
+      `${environment.apiUrl}/diary`,
       JSON.stringify(diary),
       this.options
     );
